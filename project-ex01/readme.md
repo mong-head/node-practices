@@ -1,14 +1,14 @@
 # project-ex01
 
 * node project 생성
-```shell
-npm init
-```
+    ```shell
+    npm init
+    ```
 
-* node project 생성
-```shell
-npm init
-```
+* node library 설치
+    ```shell
+    npm i ejs
+    ```
 
 * project
     ```txt
