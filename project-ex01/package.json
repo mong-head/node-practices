@@ -1,0 +1,14 @@
+{
+  "name": "project-ex01",
+  "version": "1.0.0",
+  "description": "* project\r ```txt\r project-ex01\r   |--- package.json (manifest file : project 설명)\r   |--- package-lock.json (dependency script : 의존 library 정보-버전까지)\r   |--- /node_modules  (gitignore)\r   |--- /public \r   |--- index.js (start page)\r   |--- /src\r   |--- /controller\r   |--- /view\r   |--- /router\r   |--- /model\r ```\r * package.json \r     * pom.xml 비슷\r     * 이거가지고 설치\r * node_modules\r     * library 여기에 설치됨\r     * git 시에는 ignore\r * public\r     * webapp 비슷 \r     * static resource\r         * landing page 존재\r * router\r     * dispatcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6"
+  }
+}
