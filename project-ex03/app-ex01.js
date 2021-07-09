@@ -8,7 +8,6 @@
  */
 
 const mongMath = require('douzone-busan-math');
-
 console.log(mongMath.sum(1,2,3));
 console.log(mongMath.max(1,2,3));
 console.log(mongMath.min(1,2,3));
