@@ -9,6 +9,7 @@
         npm i express
         npm i ejs
         npm i -D nodemon
+        npm i mysql
         ```
 
     * package.json 수정
