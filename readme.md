@@ -12,3 +12,5 @@
     * 보통은 위의 모듈보다는 express사용해서 web application 만듦
 * [helloweb 02](helloweb-ex02)
     * express 사용 application 만들기
+* [emaillist 01](emaillist01)
+    * model 연습
