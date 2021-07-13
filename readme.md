@@ -13,4 +13,4 @@
 * [helloweb 02](helloweb-ex02)
     * express 사용 application 만들기
 * [emaillist 01](emaillist01)
-    * model 연습
+    * model mysql 연습
