@@ -37,5 +37,17 @@
 
     * model 연습
         * [db 연결](models/dbconn.js)
-        * query 有 function : 비동기 함수
+        * query 有 function : async, await (controller 함수도 async, await 사용)
+            * query 날려서 데이터 받아오는 함수 : promisify
+                ```js
+                // models/emaillist.js, 간략히 표현
+                async function(emaillist){
+                    const query = util.promisify(conn.query).bind(conn); //this를 db connection으로 하고, 쿼리 함수를 promise화시킴
+                    const results = await query("insert into emaillist values(null, ?,?,?)",
+                Object.values(emaillist));
+                    return results;
+                }
+                ```
+                * emaillist: Object 형태 (```{'no':42, 'email': 'dooly@gmail.com',... }```)
+                * ```Object.values(emaillist)``` : Array 형태 (```[42,'dooly@gmail.com',...]```)
 
