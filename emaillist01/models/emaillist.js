@@ -33,7 +33,7 @@ module.exports = {
 
         try{
             const results = await query("insert into emaillist values(null, ?,?,?)",
-                [emaillist.firstName, emaillist.lastName, emaillist.email]);
+            Object.values(emaillist));
             return results;
         } catch(error) {
             console.error(e);
