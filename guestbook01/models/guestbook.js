@@ -30,6 +30,7 @@ module.exports = {
         try{
             const results = await query("delete from guestbook where no= ? and password= ?",
             Object.values(guestbook));
+            results.no = Object.values(guestbook)[0];
             return results;
         } catch(error) {
             console.error(error);
