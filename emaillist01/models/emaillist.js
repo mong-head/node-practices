@@ -22,7 +22,25 @@ module.exports = {
         
         return null;
     },
-    insert: function(){
+    insert: async function(emaillist){
+        console.log(emaillist);                 // 객체
+        console.log(Object.values(emaillist));  // 배열
 
+        const conn = dbconn();
+
+        // promise
+        const query = util.promisify(conn.query).bind(conn);
+
+        try{
+            const results = await query("insert into emaillist values(null, ?,?,?)",
+                [emaillist.firstName, emaillist.lastName, emaillist.email]);
+            return results;
+        } catch(error) {
+            console.error(e);
+        } finally {
+            conn.end();
+        }
+        
+        return null;
     }
 }

@@ -7,9 +7,9 @@ exports.index = async function(req,res){
     });
 }
 exports.form = function(req,res){
-    res.render("form")
+    res.render("form");
 }
-exports.add = function(req,res){
-    console.log(req.body);
-    res.redirect("/")
+exports.add = async function(req,res){
+    const results = await model.insert(req.body);
+    res.redirect("/");
 }

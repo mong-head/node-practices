@@ -26,10 +26,15 @@
 * directory 설명
     * public : static resources(img, html)
     * routes : mapping
-    * controllers : 
-    * models : 
+    * controllers : rendering/ redirecting
+    * models : DB query관련
     * views : ejs(화면)
 
-* index.js -> routes/emaillist.js -> controllers/emaillist.js(index) -> models/emaillist.js -> views/index.ejs
+* project 설명
 
-* index.js -> routes/emaillist.js -> controllers/emaillist.js(addform) -> models/emaillist.js -> views/add.ejs
+    <img src="https://user-images.githubusercontent.com/52481037/125382758-3d3cd900-e3d1-11eb-87f1-0bfdde40124a.jpg" width="50%"/>
+
+    * model 연습
+        * [db 연결](models/dbconn.js)
+        * query 有 function : 비동기 함수
+
