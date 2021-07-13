@@ -43,8 +43,7 @@
                 // models/emaillist.js, 간략히 표현
                 async function(emaillist){
                     const query = util.promisify(conn.query).bind(conn); //this를 db connection으로 하고, 쿼리 함수를 promise화시킴
-                    const results = await query("insert into emaillist values(null, ?,?,?)",
-                Object.values(emaillist));
+                    const results = await query("insert into emaillist values(null, ?,?,?)", Object.values(emaillist));
                     return results;
                 }
                 ```
