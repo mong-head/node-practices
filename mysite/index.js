@@ -14,6 +14,7 @@ dotenv.config({path: path.join(__dirname,'config/db.env')})
 // router
 const mainRouter = require('./routes/main');
 const userRouter = require('./routes/user');
+const guestbookRouter = require('./routes/guestbook');
 
 // application setup
 const application = express()
@@ -41,6 +42,7 @@ const application = express()
     })
     .use("/",mainRouter)
     .use("/user",userRouter)
+    .use("/guestbook",guestbookRouter)
     // default mapping (잘못된 경로로 들어온 경우)
     .use((req,res) => res.render('error/404'));
 

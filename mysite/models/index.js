@@ -21,5 +21,5 @@ Guestbook.sync({
     force: process.env.TABLE_CREATE_ALWAYS === 'true',
     alter: process.env.TABLE_ALTER_SYNC === 'true'     
 })
-module.exports = {User,Guestbook}; 
+module.exports = {sequelize, User,Guestbook}; 
 // {User : User} : User라는 이름으로 User 객체 맵핑, {User} : ES6 같은 기능
