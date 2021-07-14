@@ -14,3 +14,12 @@
     * express 사용 application 만들기
 * [emaillist 01](emaillist01)
     * model mysql 연습
+* [guestbook 01](guestbook01)
+    * model mysql 연습
+* [mysite](mysite)
+    - orm(sequelize) - JS Test
+    - user(session, 인증, 접근제어), jQuery(ajax) + Node API
+    - views → include(ejs)
+    - dotenv(configuration: DB Connection Info, port, stationary ~~)
+    - log(winston)
+    - file upload(multer)
