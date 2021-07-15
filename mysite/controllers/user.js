@@ -47,8 +47,7 @@ module.exports = {
       delete updateObject['name'];
     }
 
-    // 강사님 코드
-    //const{[req.body.password == ''? 'password': ]}
+    //const{[req.body.password == ''? 'password': '', req.body.name == ''? 'name': '']:remove, ...updateObject} = req.body;
 
     console.log(updateObject);
     await models.User.update(updateObject, {
@@ -57,7 +56,11 @@ module.exports = {
       }
     });
 
-    req.session.authUser.name = req.body.name;
+    if(req.body.name !== ""){
+      req.session.authUser.name = req.body.name;
+    }
+    console.log( req.session.authUser.name);
+    //req.body.name == "" ?  req.body.name = req.session.authUser.name : req.session.authUser.name = req.body.name;
     res.redirect('/');
   }
 };

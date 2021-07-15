@@ -15,6 +15,7 @@
     npm i dotenv       
     npm i sequelize
     npm i mysql2
+    npm i moment
     npm i -D nodemon
     ```
     * development
@@ -31,6 +32,7 @@
             * sequelize : DBMS(MySQL, Oracle, Postgre,...) 상관없이 사용가능
             * [문서 참고](https://sequelize.org/master/manual/model-querying-basics.html)
         * mysql2 : mysql보다 좋은 mysql 모듈, sequelize가 mysql사용할 수 있게 바꿔줌
+        * moment : date format lib
 * scripts in package.json
     ```json
      "scripts": {

@@ -28,7 +28,8 @@ module.exports = function(sequelize){
         reg_date: {
             field: 'reg_date',
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: false,
+            defaultValue: Sequelize.NOW
         }
     },{
         underscored: true,
