@@ -46,8 +46,18 @@ const application = express()
     .use("/",mainRouter)
     .use("/user",userRouter)
     .use("/guestbook",guestbookRouter)
-    // default mapping (잘못된 경로로 들어온 경우)
-    .use((req,res) => res.render('error/404'));
+    // 404: default mapping (잘못된 경로로 들어온 경우)
+    .use((req,res) => res.status(404).render('error/404'))
+    // 500: server error
+    .use((err,req,res,next) => {
+        // logging
+        // err.name, err.message, err.stack 中
+        logger.error(err.stack);
+        
+        // apology page
+        //res.status(500).render('error/500');              // for release
+        res.status(500).send(`<pre>${err.stack}</pre>`);    // for dev
+    })
 
 // server setup
 http.createServer(application)
