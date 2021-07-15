@@ -48,6 +48,8 @@
     * ```npm start``` : 운용시
     * ```npm run debug``` : 개발시; live update
 
+* Restful API tester : Postman 사용
+
 ## Project
 
 * Structure
