@@ -38,44 +38,25 @@ module.exports = {
   logout: async (req,res) => { await req.session.destroy(); res.redirect("/") },
   update: (req,res) => res.render('user/update'),
   _update: async (req,res) => {
-    console.log(req.body)
-    if(req.body.password !== '' && req.body.name !== ''){
-      await models.User.update({ 
-        name: req.body.name,
-        password: req.body.password,
-        gender: req.body.gender
-      }, {
+
+    const updateObject = Object.assign(req.body);
+    if(req.body['password'] == ''){
+      delete updateObject['password'];
+    }
+    if(req.body['name'] == ''){
+      delete updateObject['name'];
+    }
+
+    // 강사님 코드
+    //const{[req.body.password == ''? 'password': ]}
+
+    console.log(updateObject);
+    await models.User.update(updateObject, {
       where: {
         no: req.body.no
       }
     });
-    } else if(req.body.password == '' && req.body.name == ''){
-        await models.User.update({ 
-          gender: req.body.gender
-        }, {
-        where: {
-          no: req.body.no
-        }
-      });
-    } else if(req.body.password === ''){
-        await models.User.update({ 
-          name: req.body.name,
-          gender: req.body.gender
-        }, {
-        where: {
-          no: req.body.no
-        }
-      });
-    } else if(req.body.name === ''){
-        await models.User.update({ 
-          password: req.body.password,
-          gender: req.body.gender
-        }, {
-        where: {
-          no: req.body.no
-        }
-      });
-    } 
+
     req.session.authUser.name = req.body.name;
     res.redirect('/');
   }
