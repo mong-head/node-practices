@@ -16,6 +16,8 @@
     npm i sequelize
     npm i mysql2
     npm i moment
+    npm i winston
+    npm i winston-daily-rotate-file
     npm i -D nodemon
     ```
     * development
@@ -23,12 +25,15 @@
         * express : for web application development
     * configuration
         * dotenv : 설정파일관련(환경변수)
+        * logging
+            * winston
+            * winston-daily-rotate-file
     * views
         * ejs : views
     * session
         * express-session
     * DB
-        * orm : 객체와 mysql table mapping
+        * orm : 객체와 mysql table mapping (object relational mapping)
             * sequelize : DBMS(MySQL, Oracle, Postgre,...) 상관없이 사용가능
             * [문서 참고](https://sequelize.org/master/manual/model-querying-basics.html)
         * mysql2 : mysql보다 좋은 mysql 모듈, sequelize가 mysql사용할 수 있게 바꿔줌
@@ -48,12 +53,14 @@
 * Structure
     ```txt
     /mysite
-        |--- index.js
-        |--- package.json
-        |--- package-lock.json
-        |--- /node-modules
-        |--- /config
-        |--- /public
+        |--- index.js           : application define, init
+        |--- package.json       : module 정보 저장
+        |--- package-lock.json  : module 정보 저장
+        |--- /node-modules      : modules 저장 (gitignore)
+        |--- /config            : 환경 변수
+        |--- /logging           : log format등등 저장(winston 사용)
+        |--- /logs              : logging file 존재
+        |--- /public            : static resources
         |--- /routes
         |--- /controllers
         |--- /models
@@ -65,3 +72,9 @@
                 |--- /gallery
                 |--- /admin
     ```
+    * config
+        * 환경 변수 저장
+            * PROFILE
+                * development : 개발중일 떄
+                * production : 개발 마치고 release할 때
+        * 환경 변수 사용? ```process.env.PROFILE```

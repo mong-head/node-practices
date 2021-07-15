@@ -11,6 +11,9 @@ const port = 8080;
 dotenv.config({path: path.join(__dirname,'config/app.env')})
 dotenv.config({path: path.join(__dirname,'config/db.env')})
 
+// logging
+const logger = require('./logging');
+
 // router
 const mainRouter = require('./routes/main');
 const userRouter = require('./routes/user');
@@ -49,7 +52,7 @@ const application = express()
 // server setup
 http.createServer(application)
     .on('listening',function(){
-        console.info(`HTTP server running on port ${process.env.PORT}`);
+        logger.info(`HTTP server running on port ${process.env.PORT}`);
     })
     .on('error',function(error){
         if(error.syscal !== 'listen'){
@@ -60,12 +63,12 @@ http.createServer(application)
         switch(error.code){
             // port 못열때
             case 'EACCESS':
-                console.error(`Port: ${process.env.PORT} requires privileges.`);
+                logger.error(`Port: ${process.env.PORT} requires privileges.`);
                 process.exit(1); // 비정상 종료
                 break;
             // 서버 또 열때
             case 'EADDRINUSE':
-                console.error(`Port: ${process.env.PORT} is already used.`);
+                logger.error(`Port: ${process.env.PORT} is already used.`);
                 process.exit(1);
                 break;
             default:
