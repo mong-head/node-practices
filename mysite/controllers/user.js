@@ -52,29 +52,26 @@ module.exports = {
   update: (req,res) => res.render('user/update'),
   _update: async (req,res,next) => {
     try{
-      const updateObject = Object.assign(req.body);
-      if(req.body['password'] == ''){
-        delete updateObject['password'];
-      }
-      if(req.body['name'] == ''){
-        delete updateObject['name'];
-      }
+      // const updateObject = Object.assign(req.body);
+      // if(req.body['password'] == ''){
+      //   delete updateObject['password'];
+      // }
+      // if(req.body['name'] == ''){
+      //   delete updateObject['name'];
+      // }
 
-      //const{[req.body.password == ''? 'password': '', req.body.name == ''? 'name': '']:remove, ...updateObject} = req.body;
-      console.log(updateObject);
+      // req.body.name == ''? 'name': ''
+      const{[req.body.password == ''? 'password': '']:remove, [req.body.name == ''? 'name': '']:remove_, ...updateObject} = req.body;
+
       await models.User.update(updateObject, {
         where: {
           no: req.body.no
         }
       });
 
-      console.log( req.session.authUser.name);
       if(req.body.name != ""){
-        console.log( req.session.authUser.name);
         req.session.authUser.name = req.body.name;
       }
-      console.log( req.session.authUser.name);
-      //req.body.name == "" ?  req.body.name = req.session.authUser.name : req.session.authUser.name = req.body.name;
       res.redirect('/');
     } catch(err){
       logger.error(err.stack);
