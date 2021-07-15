@@ -62,13 +62,15 @@ module.exports = {
 
       //const{[req.body.password == ''? 'password': '', req.body.name == ''? 'name': '']:remove, ...updateObject} = req.body;
       console.log(updateObject);
-      await models.User.updat(updateObject, {
+      await models.User.update(updateObject, {
         where: {
           no: req.body.no
         }
       });
 
-      if(req.body.name !== ""){
+      console.log( req.session.authUser.name);
+      if(req.body.name != ""){
+        console.log( req.session.authUser.name);
         req.session.authUser.name = req.body.name;
       }
       console.log( req.session.authUser.name);

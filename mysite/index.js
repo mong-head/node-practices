@@ -18,6 +18,7 @@ const logger = require('./logging');
 const mainRouter = require('./routes/main');
 const userRouter = require('./routes/user');
 const guestbookRouter = require('./routes/guestbook');
+const errorRouter = require('./routes/error');
 
 // application setup
 const application = express()
@@ -37,7 +38,7 @@ const application = express()
     .set("views",path.join(__dirname,"views"))
     .set("view engine","ejs")
     // 5. request router
-        // 모든 method(GET,POST,PUT,DELETE), 모든 url
+    // 모든 method(GET,POST,PUT,DELETE), 모든 url
     .all('*',function(req,res,next){
         res.locals.req = req;
         res.locals.res = res;
@@ -47,17 +48,9 @@ const application = express()
     .use("/user",userRouter)
     .use("/guestbook",guestbookRouter)
     // 404: default mapping (잘못된 경로로 들어온 경우)
-    .use((req,res) => res.status(404).render('error/404'))
+    .use(errorRouter.error404)
     // 500: server error
-    .use((err,req,res,next) => {
-        // logging
-        // err.name, err.message, err.stack 中
-        logger.error(err.stack);
-        
-        // apology page
-        //res.status(500).render('error/500');              // for release
-        res.status(500).send(`<pre>${err.stack}</pre>`);    // for dev
-    })
+    .use(errorRouter.error500);
 
 // server setup
 http.createServer(application)
