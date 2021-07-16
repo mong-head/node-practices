@@ -1,4 +1,5 @@
 const models = require("../models"); // /models/index.js
+const { Op } = require("sequelize");
 
 module.exports = {
     read: async (req,res,next) => {
@@ -11,7 +12,7 @@ module.exports = {
             order: [
                 ['no', 'DESC'],
             ],
-            offset: startNo,
+            where: (startNo > 0) ? {no: {[Op.lt]:startNo}} : {},
             limit: 3
         });
         res.status(200).send({
@@ -28,19 +29,13 @@ module.exports = {
               password: req.body.password
             }
           });
-        if(results){
-            res.status(200).send({
-                result: 'success',
-                data: req.params.no,
-                message: null
-            });
-        } else {
-            res.status(200).send({
-                result: 'success',
-                data: -1,
-                message: null
-            });
-        }
+     
+        res.status(200).send({
+            result: 'success',
+            data: results,
+            message: null
+        });
+       
         
     },
     post: async (req,res,next) =>{
