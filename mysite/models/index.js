@@ -13,6 +13,7 @@ const sequelize = new Sequelize(
 
 const User = require('./User')(sequelize);
 const Guestbook = require('./Guestbook')(sequelize);
+const Gallery = require('./Gallery')(sequelize);
 
 User.sync({
     force: process.env.TABLE_CREATE_ALWAYS === 'true', // true : (drop) table 데이터 없어질 수 있음
@@ -22,5 +23,9 @@ Guestbook.sync({
     force: process.env.TABLE_CREATE_ALWAYS === 'true',
     alter: process.env.TABLE_ALTER_SYNC === 'true'     
 })
-module.exports = {sequelize, User,Guestbook}; 
+Gallery.sync({
+    force: process.env.TABLE_CREATE_ALWAYS === 'true',
+    alter: process.env.TABLE_ALTER_SYNC === 'true'     
+})
+module.exports = {sequelize, User,Guestbook,Gallery }; 
 // {User : User} : User라는 이름으로 User 객체 맵핑, {User} : ES6 같은 기능

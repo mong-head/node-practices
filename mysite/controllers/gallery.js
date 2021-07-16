@@ -1,32 +1,59 @@
+const path = require('path');
+const fs = require('fs');
+const models = require('../models');
 
 module.exports = {
     index: async (req,res,next) => {
         try{
-            res.render('gallery/index')
+            const list = await models.Gallery.findAll({
+                attributes: ['no','url','comment'],
+                order: [
+                    ['no','desc']
+                ]
+            });
+            res.render('gallery/index',{
+                list: list
+            });
         } catch(err){
             next(err);
         }
     },
     delete: async (req,res,next) => {
-        console.log(req.params.no + ":" + req.body.password);
-        // sql delete - do this
-        res.status(200).send({
-            result: 'success',
-            data: req.params.no,
-            message: null
-        });
+        try{
+            const results = await models.Gallery.destroy({
+                where: {
+                  no: req.params.no
+                }
+              });
+            
+            res.redirect("/gallery");
+        } catch(err){
+            next(err);
+        }
+        
     },
-    post: async (req,res,next) =>{
-        // sql insert - do this
-        res.status(200).send({
-            result: 'success',
-            data: Object.assign(req.body,{
-                no: 10,
-                password: '', //password 가리기
-                reg_date: new Date() // now
-            }),
-            message: null
-        });
+    upload: async (req,res,next) =>{
+        try{
+            if(req.file == null){
+                res.redirect("/gallery");
+            }
+            const file = req.file;
 
+            const storeDirectory = path.join(path.dirname(require.main.filename),process.env.STATIC_RESOURCES_DIRECTORY,process.env.GALLERY_STORE_LOCATION);
+            const url = path.join(process.env.GALLERY_STORE_LOCATION,file.filename) + path.extname(file.originalname);
+            const storePath = path.join(storeDirectory,file.filename) + path.extname(file.originalname);
+            
+            fs.existsSync(storeDirectory) || fs.mkdirSync(storeDirectory);
+            const content = fs.readFileSync(file.path);
+            fs.writeFileSync(storePath,content,{flag: 'w+'});
+
+            await models.Gallery.create({
+                url: url.replace(/\\/gi,'/'),
+                comment: req.body.comment || ''
+            })
+            res.redirect("/gallery");
+        } catch(err){
+            next(err);
+        }
     }
 }
