@@ -17,9 +17,9 @@
 * [guestbook 01](guestbook01)
     * model mysql 연습
 * [mysite](mysite)
-    - orm(sequelize) - JS Test
-    - user(session, 인증, 접근제어), jQuery(ajax) + Node API
-    - views → include(ejs)
-    - dotenv(configuration: DB Connection Info, port, stationary ~~)
-    - log(winston)
-    - file upload(multer)
+    * 종합 연습
+        * mysql sequelize(orm) 사용 연습
+        * 위의 modules(ejs,...) 연습
+        * other modules(dotenv, winston, multer) 연습
+        * session이용 인증 및 접근제어 연습 : /user
+        * jQuery(ajax) + Node API 사용 연습 : /user, /guestbook
