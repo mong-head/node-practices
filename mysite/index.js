@@ -17,8 +17,9 @@ const logger = require('./logging');
 // router
 const mainRouter = require('./routes/main');
 const userRouter = require('./routes/user');
-const userApiRouter = require('./routes/user-api');
 const guestbookRouter = require('./routes/guestbook');
+const userApiRouter = require('./routes/user-api');
+const guestbookApiRouter = require('./routes/guestbook-api');
 const errorRouter = require('./routes/error');
 
 // application setup
@@ -47,8 +48,10 @@ const application = express()
     })
     .use("/",mainRouter)
     .use("/user",userRouter)
-    .use("/api/user",userApiRouter)
     .use("/guestbook",guestbookRouter)
+    // api
+    .use("/api/user",userApiRouter)
+    .use("/api/guestbook",guestbookApiRouter)
     // 404: default mapping (잘못된 경로로 들어온 경우)
     .use(errorRouter.error404)
     // 500: server error
