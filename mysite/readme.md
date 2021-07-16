@@ -4,9 +4,9 @@
 
 * 환경 구성
     * create project manifest file(package.json)
-    ```ps
-    npm init -y
-    ```
+        ```ps
+        npm init -y
+        ```
 
 * 설치 패키지
     ```ps
