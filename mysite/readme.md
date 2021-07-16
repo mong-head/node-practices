@@ -16,6 +16,7 @@
     npm i dotenv       
     npm i sequelize
     npm i mysql2
+    npm i multer
     npm i moment
     npm i winston
     npm i winston-daily-rotate-file
@@ -31,6 +32,7 @@
             * winston-daily-rotate-file
     * views
         * ejs : views
+        * moment : date format lib
     * session
         * express-session
     * DB
@@ -38,7 +40,7 @@
             * sequelize : DBMS(MySQL, Oracle, Postgre,...) 상관없이 사용가능
             * [문서 참고](https://sequelize.org/master/manual/model-querying-basics.html)
         * mysql2 : mysql보다 좋은 mysql 모듈, sequelize가 mysql사용할 수 있게 바꿔줌
-        * moment : date format lib
+        * multer : multi-part parser; image upload (gallery에 필요)
 * scripts in package.json
     ```json
      "scripts": {
@@ -56,14 +58,17 @@
 * Structure
     ```txt
     /mysite
-        |--- index.js           : application define, init
-        |--- package.json       : module 정보 저장, project manifest(설명)
-        |--- package-lock.json  : module 정보 저장(버전까지)
-        |--- /node-modules      : modules 저장 (gitignore)
-        |--- /config            : 환경 변수
-        |--- /logging           : log format등등 저장(winston 사용)
-        |--- /logs              : logging file 존재
-        |--- /public            : static resources
+        |--- index.js                   : application define, init
+        |--- package.json               : module 정보 저장, project manifest(설명)
+        |--- package-lock.json          : module 정보 저장(버전까지)
+        |--- /node-modules              : modules 저장 (gitignore)
+        |--- /config                    : 환경 변수
+        |--- /logging                   : log format등등 저장(winston 사용)
+        |--- /logs                      : logging file 존재
+        |--- /multer-temporary-store
+        |--- /public                    : static resources
+        |       |--- /assets
+        |               |--- /gallery   : multi-part img 저장소
         |--- /routes
         |--- /controllers
         |--- /models
