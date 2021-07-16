@@ -3,6 +3,7 @@
 ## 환경 구성
 
 * 환경 구성
+    * create project manifest file(package.json)
     ```ps
     npm init -y
     ```
@@ -56,8 +57,8 @@
     ```txt
     /mysite
         |--- index.js           : application define, init
-        |--- package.json       : module 정보 저장
-        |--- package-lock.json  : module 정보 저장
+        |--- package.json       : module 정보 저장, project manifest(설명)
+        |--- package-lock.json  : module 정보 저장(버전까지)
         |--- /node-modules      : modules 저장 (gitignore)
         |--- /config            : 환경 변수
         |--- /logging           : log format등등 저장(winston 사용)
