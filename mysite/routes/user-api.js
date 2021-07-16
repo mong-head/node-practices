@@ -4,11 +4,6 @@ const auth = require('./auth');
 
 const router = express.Router()
 router.route('/checkemail').get(controller.checkemail);
-
-router.route('/needauth').get(auth,(req,res)=>{
-    res.send({
-        result:"success"
-    })
-});
+router.route('/needauth').get(auth,(req,res)=> res.send({result:"success"}));
 
 module.exports = router;

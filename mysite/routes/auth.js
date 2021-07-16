@@ -1,6 +1,6 @@
 module.exports = (req,res,next) =>{
     if(req.session.authUser){
-        next();
+        next(); //controller.update등으로 가야함
         return;
     }
     
@@ -16,7 +16,4 @@ module.exports = (req,res,next) =>{
         data: null,
         message: "auth failed"
     })
-
-
-    //next(); //controller.update등으로 가야함
 }
