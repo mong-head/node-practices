@@ -30,9 +30,10 @@ module.exports = {
             }
           });
      
+        console.log(results)
         res.status(200).send({
             result: 'success',
-            data: results,
+            data: results==0 ? -1 : req.params.no,
             message: null
         });
        
@@ -40,15 +41,13 @@ module.exports = {
     },
     post: async (req,res,next) =>{
         const results = await models.Guestbook.create(req.body);
-        if(results){
-            res.status(200).send({
-                result: 'success',
-                data: Object.assign(req.body,{
-                    password: '', //password 가리기
-                }),
-                message: null
-            });
-        }
-        return;
+
+        res.status(200).send({
+            result: 'success',
+            data: results,
+            message: null
+        });
+        
+   
     }
 }
