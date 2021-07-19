@@ -21,10 +21,12 @@
     npm i winston
     npm i winston-daily-rotate-file
     npm i -D nodemon
+    npm i -D mocha
     ```
     * development
         * nodemon : for development (live server)
         * express : for web application development
+        * mocha : testing
     * configuration
         * dotenv : 설정파일관련(환경변수)
         * logging
@@ -45,7 +47,8 @@
     ```json
      "scripts": {
             "start": "node index.js",
-            "debug": "nodemon index.js"
+            "debug": "nodemon index.js",
+            "test": "npx mocha"
         }
     ```
     * ```npm start``` : 운용시
@@ -61,11 +64,12 @@
         |--- index.js                   : application define, init
         |--- package.json               : module 정보 저장, project manifest(설명)
         |--- package-lock.json          : module 정보 저장(버전까지)
-        |--- /node-modules              : modules 저장 (gitignore)
+        |--- [/node-modules]            : modules 저장 (gitignore)
         |--- /config                    : 환경 변수
         |--- /logging                   : log format등등 저장(winston 사용)
-        |--- /logs                      : logging file 존재
-        |--- /multer-temporary-store
+        |--- [/logs]                    : logging file 존재
+        |--- [/multer-temporary-store]
+        |--- /test                      : testing (using mocha)
         |--- /public                    : static resources
         |       |--- /assets
         |               |--- /gallery   : multi-part img 저장소

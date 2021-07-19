@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "test": "npx mocha",
     "debug": "nodemon index.js"
   },
   "keywords": [],
@@ -23,6 +24,7 @@
     "winston-daily-rotate-file": "^4.5.5"
   },
   "devDependencies": {
+    "mocha": "^9.0.2",
     "nodemon": "^2.0.12"
   }
 }
