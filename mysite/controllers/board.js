@@ -149,5 +149,19 @@ module.exports = {
         } catch(err){
             next(err);
         }
+    },
+    _update: async (req,res,next) => {
+        try{
+            await models.Board.update({
+                title: req.body.title,
+                contents: req.body.contents
+             }, { where: {
+                    no : req.params.no
+                }
+            });
+            res.redirect("/board");
+        }catch(err){
+            next(err);
+        }
     }
 }
