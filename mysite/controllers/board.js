@@ -1,5 +1,6 @@
 const models = require('../models');
 const { Op } = require("sequelize");
+const board = require('./admin/board');
 
 module.exports = {
     index: async (req,res,next) => {
@@ -128,6 +129,23 @@ module.exports = {
             }
             console.log(req.body);
             res.redirect('/board');
+        } catch(err){
+            next(err);
+        }
+    },
+    update: async (req,res,next) => {
+        try{
+            const no = req.params.no;
+            const boardVo = await models.Board.findOne({
+                where : {
+                    no : no
+                }
+            });
+            res.render('board/modify',{
+                no : no,
+                boardVo: boardVo
+            })
+
         } catch(err){
             next(err);
         }
