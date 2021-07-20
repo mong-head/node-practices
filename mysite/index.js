@@ -22,6 +22,7 @@
     const userRouter = require('./routes/user');
     const guestbookRouter = require('./routes/guestbook');
     const galleryRouter = require('./routes/gallery');
+    const adminRouter = require('./routes/admin');
     const userApiRouter = require('./routes/user-api');
     const guestbookApiRouter = require('./routes/guestbook-api');
     const errorRouter = require('./routes/error');
@@ -58,6 +59,7 @@
         .use("/user",userRouter)
         .use("/guestbook",guestbookRouter)
         .use("/gallery",galleryRouter)
+        .use("/admin",adminRouter)
         // api
         .use("/api/user",userApiRouter)
         .use("/api/guestbook",guestbookApiRouter)
