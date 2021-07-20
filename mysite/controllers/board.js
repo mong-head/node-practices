@@ -1,4 +1,5 @@
 const models = require('../models');
+const { Op } = require("sequelize");
 
 module.exports = {
     index: async (req,res,next) => {
@@ -81,6 +82,27 @@ module.exports = {
             let user_no = req.session.authUser.no;
             
             if(req.params.no){
+                let currentVo = await models.Board.findOne({
+                    where: {
+                        no : req.params.no
+                    }
+                });
+                await models.Board.update({
+                    order_no: models.sequelize.Sequelize.literal('order_no + 1'),
+                 }, { where: {
+                        order_no : {[Op.gt] : currentVo.order_no},
+                        group_no : currentVo.group_no
+                    }
+                });
+                await models.Board.create({
+                    title : req.body.title,
+                    contents: req.body.contents,
+                    hit: 0,
+                    group_no : currentVo.group_no,
+                    order_no: currentVo.order_no + 1,
+                    depth: currentVo.depth + 1,
+                    user_no : user_no
+                });
 
             } else {
                 let max_groupNo = await models.Board.max('group_no');
