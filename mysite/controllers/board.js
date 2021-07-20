@@ -67,6 +67,15 @@ module.exports = {
                     no : no
                 }
             })
+            // update hit
+            await models.Board.update({
+                    hit: boardVo.hit + 1 
+                }, { 
+                    where : {
+                        no : no
+                    }
+                }
+            );
             res.render('board/view',{
                 boardVo: boardVo
             });
