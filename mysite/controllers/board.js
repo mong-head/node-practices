@@ -58,9 +58,19 @@ module.exports = {
             next(err);
         }
     },
-    // view: async (req,res,next) => {
-    //     await models.Board.findOne{
-
-    //     }
-    // }
+    view: async (req,res,next) => {
+        try{
+            let no = req.params.no;
+            const boardVo = await models.Board.findOne({
+                where:{
+                    no : no
+                }
+            })
+            res.render('board/view',{
+                boardVo: boardVo
+            });
+        } catch(err){
+            next(err);
+        }
+    }
 }

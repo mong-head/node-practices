@@ -16,22 +16,45 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>제목입니다.</td>
+						<td><%=boardVo.title %></td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								내용 1입니다.<br>
-								내용 2입니다.<br>
-								내용 3입니다.
+								<%=boardVo.contents.replaceAll('\n','<br/>') %>
 							</div>
 						</td>
 					</tr>
 				</table>
+				<% if( req.session.authUser ) { %>
+					<form class="board-form" method="post" action="/board/write/<%=boardVo.no %>">
+					<table class="tbl-ex">
+						<tr>
+							<th colspan="2">덧글쓰기</th>
+						</tr>
+						<tr>
+							<td class="label">제목</td>
+							<td><input type="text" name="title" value=""></td>
+						</tr>
+						<tr>
+							<td class="label">내용</td>
+							<td>
+								<textarea id="content" name="contents"></textarea>
+							</td>
+						</tr>
+					</table>
+					<div class="bottom">
+						<input type="submit" value="등록">
+					</div>
+					
+					</form>
+				<% } %>
 				<div class="bottom">
-					<a href="">글목록</a>
-					<a href="">글수정</a>
+					<a href="/board">글목록</a>
+					<% if( req.session.authUser &&  req.session.authUser.no == boardVo.user_no) { %>
+						<a href="/board/update/<%=boardVo.no %>">글수정</a>
+					<% } %>
 				</div>
 			</div>
 		</div>
