@@ -1,13 +1,14 @@
 const models = require('../models');
 const { Op } = require("sequelize");
 const board = require('./admin/board');
+const url = require('url');  
 
 module.exports = {
     index: async (req,res,next) => {
         try{
             // variance
-            let currentPageNo = (req.params.no == null ? 1 : req.params.no);
-            let looking_for = (req.body.looking_for ? req.body.looking_for : "title_contents");
+            let currentPageNo = (req.query.p == null ? 1 : req.query.p);
+            let looking_for = (req.query.looking_for ? req.query.looking_for : "title_contents");
             
             // sql
             const size_list = await models.Board.findAll();
@@ -160,6 +161,30 @@ module.exports = {
                 }
             });
             res.redirect("/board");
+        }catch(err){
+            next(err);
+        }
+    },
+    delete: async (req,res,next) => {
+        try{
+            const no = req.params.no;
+            const currentPageNo = req.query.p;
+            const kwd = (req.query.kwd ? req.query.kwd : null);
+            const looking_for = (req.query.looking_for ? req.query.looking_for : "title_contents");
+            
+            await models.Board.destroy({
+                where : {
+                    no : no
+                }
+            })
+            res.redirect(url.format({
+                pathname : '/board',
+                query: {
+                    p : currentPageNo,
+                    kwd: kwd,
+                    looking_for: looking_for
+                }
+            }));
         }catch(err){
             next(err);
         }

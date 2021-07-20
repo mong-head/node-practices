@@ -48,7 +48,7 @@
 						<td><%=vo.reg_date %></td>
 						<td>
 							<% if( req.session.authUser && req.session.authUser.no === vo.user_no){ %>
-								<a href="/board/delete?no=${vo.no}&p=${pageInfo.currentPageNo}&kwd=${kwd}&looking_for=${looking_for}" style='background-image:url("/assets/images/recycle.png")' class="del">삭제</a>
+								<a href="/board/delete/<%=vo.no %>?p=<%=pageInfo.currentPageNo%>&kwd=<%=(locals.kwd ? kwd : '') %>&looking_for=<%=looking_for%>" style='background-image:url("/assets/images/recycle.png")' class="del">삭제</a>
 							<% } %>
 						</td>
 					</tr>
@@ -59,19 +59,19 @@
 				<div class="pager">
 					<ul>
 						<% if(pageInfo.firstPageNo !== 1) { %>
-							<li><a href="/board/<%=pageInfo.prevPageNo %>?kwd=<%=(locals.kwd ? kwd : '') %>&looking_for=<%=looking_for%>">◀</a></li>
+							<li><a href="/board?p=<%=pageInfo.prevPageNo %>&kwd=<%=(locals.kwd ? kwd : '') %>&looking_for=<%=looking_for%>">◀</a></li>
 						<% } %>
 						<% for(let i = pageInfo.firstPageNo;i<=pageInfo.lastPageNo;i++) { %>
 							<li <%- (i === pageInfo.currentPageNo ? 'class="selected"' : '' ) %> >
 								<% if(i > pageInfo.totalPage){ %>
 									<%=i %>
 								<% } else { %>
-									<a href="/board/<%=i %>?kwd=<%=(locals.kwd ? kwd : '') %>&looking_for=<%=looking_for%>"><%=i %></a>
+									<a href="/board?p=<%=i %>&kwd=<%=(locals.kwd ? kwd : '') %>&looking_for=<%=looking_for%>"><%=i %></a>
 								<% } %>		
 							</li>
 						<% } %>
 						<% if(pageInfo.lastPageNo < pageInfo.totalPage){ %>
-							<li><a href="/board/<%=pageInfo.nextPageNo %>?kwd=<%=(locals.kwd ? kwd : '') %>&looking_for=<%=looking_for%>">▶</a></li>
+							<li><a href="/board?p=<%=pageInfo.nextPageNo %>&kwd=<%=(locals.kwd ? kwd : '') %>&looking_for=<%=looking_for%>">▶</a></li>
 						<% } %>
 					</ul>
 				</div>

@@ -7,6 +7,8 @@ router.route("/write").get(controller.write);
 router.route("/write(/:no)?").post(controller._write);
 router.route("/update/:no").get(controller.update);
 router.route("/update/:no").post(controller._update);
-router.route("(/:no)?").get(controller.index);
+router.route("/delete/:no").get(controller.delete);
+router.route("").get(controller.index);
+router.route("/:no").get(controller.index);
 
 module.exports = router;
