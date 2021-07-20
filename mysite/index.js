@@ -8,7 +8,6 @@
     const multer = require('multer');
     const path = require('path');
     const dotenv = require('dotenv');
-    const port = 8080;
     
     // Environment Variables(환경변수 관리)
     dotenv.config({path: path.join(__dirname,'config/app.env')})
@@ -22,6 +21,7 @@
     const userRouter = require('./routes/user');
     const guestbookRouter = require('./routes/guestbook');
     const galleryRouter = require('./routes/gallery');
+    const boardRouter = require('./routes/board');
     const adminRouter = require('./routes/admin');
     const userApiRouter = require('./routes/user-api');
     const guestbookApiRouter = require('./routes/guestbook-api');
@@ -59,6 +59,7 @@
         .use("/user",userRouter)
         .use("/guestbook",guestbookRouter)
         .use("/gallery",galleryRouter)
+        .use("/board",boardRouter)
         .use("/admin",adminRouter)
         // api
         .use("/api/user",userApiRouter)

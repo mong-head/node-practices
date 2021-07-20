@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -15,6 +15,18 @@ const User = require('./User')(sequelize);
 const Guestbook = require('./Guestbook')(sequelize);
 const Gallery = require('./Gallery')(sequelize);
 const Site = require('./Site')(sequelize);
+const Board = require('./Board')(sequelize);
+
+// 1:N
+User.hasMany(Board,{
+    foreignKey: {
+        name: 'user_no',
+        allowNull: false, 
+        constraints: true,
+        onDelete: 'CASCADE'
+    },
+});
+Board.belongsTo(User);
 
 User.sync({
     force: process.env.TABLE_CREATE_ALWAYS === 'true', // true : (drop) table 데이터 없어질 수 있음
@@ -32,5 +44,9 @@ Site.sync({
     force: process.env.TABLE_CREATE_ALWAYS === 'true',
     alter: process.env.TABLE_ALTER_SYNC === 'true'     
 })
-module.exports = {sequelize, User,Guestbook,Gallery,Site }; 
+Board.sync({
+    force: process.env.TABLE_CREATE_ALWAYS === 'true',
+    alter: process.env.TABLE_ALTER_SYNC === 'true'     
+})
+module.exports = {sequelize, User,Guestbook,Gallery,Site,Board }; 
 // {User : User} : User라는 이름으로 User 객체 맵핑, {User} : ES6 같은 기능
