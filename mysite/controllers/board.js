@@ -72,5 +72,33 @@ module.exports = {
         } catch(err){
             next(err);
         }
+    },
+    write : (req,res) => {
+        res.render('board/write');
+    },
+    _write:  async (req,res,next) => {
+        try{
+            let user_no = req.session.authUser.no;
+            
+            if(req.params.no){
+
+            } else {
+                let max_groupNo = await models.Board.max('group_no');
+                max_groupNo = max_groupNo ? max_groupNo + 1 : 0;
+                await models.Board.create({
+                    title : req.body.title,
+                    contents: req.body.contents,
+                    hit: 0,
+                    group_no : max_groupNo,
+                    order_no: 0,
+                    depth: 0,
+                    user_no : user_no
+                });
+            }
+            console.log(req.body);
+            res.redirect('/board');
+        } catch(err){
+            next(err);
+        }
     }
 }
