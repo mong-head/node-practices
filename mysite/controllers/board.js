@@ -8,7 +8,8 @@ module.exports = {
         try{
             // variance
             let currentPageNo = (req.query.p == null ? 1 : req.query.p);
-            let looking_for = (req.query.looking_for ? req.query.looking_for : "title_contents");
+            let looking_for = (req.query.looking_for ? req.query.looking_for : (req.body.looking_for ? req.body.looking_for :"title_contents"));
+            let kwd = (req.query.kwd ? req.query.kwd : (req.body.kwd ? req.body.kwd : ""));
             
             // sql
             const size_list = await models.Board.findAll();
@@ -19,12 +20,17 @@ module.exports = {
                 ],
                 include:{
                     model: models.User,
-                    required: true
+                    required: true,
                 },
                 order: [
                     ['group_no','desc'],
                     ['order_no','asc']
                 ],
+                where: (looking_for === 'title_contents' ? {[Op.or]: [ {title: {[Op.substring]:kwd}},{contents: {[Op.substring]:kwd}}]}: 
+                        (looking_for === 'title' ? {title: {[Op.substring]:kwd}} : 
+                        (looking_for === 'contents' ? {contents: {[Op.substring]:kwd}} : 
+                        (looking_for === 'writer' ? { [`$User.name$`] : {[Op.substring]:kwd}} : ""
+                )))),
                 limit: 5,
                 offset: (currentPageNo - 1) * 5
             });
@@ -56,6 +62,7 @@ module.exports = {
                 size: size,
                 pageInfo: pageInfo,
                 looking_for: looking_for,
+                kwd: kwd
             });
         } catch(err){
             next(err);
@@ -117,7 +124,7 @@ module.exports = {
 
             } else {
                 let max_groupNo = await models.Board.max('group_no');
-                max_groupNo = max_groupNo ? max_groupNo + 1 : 0;
+                max_groupNo = isNaN(max_groupNo) ? 0 : max_groupNo + 1;
                 await models.Board.create({
                     title : req.body.title,
                     contents: req.body.contents,
